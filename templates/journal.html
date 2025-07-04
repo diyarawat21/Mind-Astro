@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MindAstro - Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>✍️ Your Healing Journal</h1>
+    <form method="POST" action="/journal">
+        <label>💖 How are you feeling today?</label><br>
+        <select name="mood" required>
+            <option value="">--Select Mood--</option>
+            <option>On 7 Cloud</option>
+            <option>Super Happy</option>
+            <option>Happy</option>
+            <option>Calm</option>
+            <option>Moderate</option>
+            <option>Overthinking</option>
+            <option>Sad</option>
+            <option>Anxious</option>
+            <option>Motivated</option>
+        </select><br><br>
+
+        <label>📝 Write your thoughts:</label><br>
+        <textarea name="entry" placeholder="Express your emotions..." required></textarea><br><br>
+
+        <button type="submit">💾 Save Entry</button>
+    </form>
+    <br>
+    <a href="/">🔙 Back to Home</a>
+</body>
+</html>

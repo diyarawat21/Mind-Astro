@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MindAstro - Emotional Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🔮 Today’s Emotional Forecast</h1>
+    
+    <p>🗓️ Date: <strong>{{ date }}</strong></p>
+    <p>🌙 Moon Sign: <strong>{{ moon_sign }}</strong></p>
+    <p>🌌 Nakshatra: <strong>{{ nakshatra }}</strong></p>
+    
+    <hr>
+    
+    <h3>💫 Emotional Guidance</h3>
+    <p style="font-size: 1.2rem;">{{ message }}</p>
+
+    <br>
+    <a href="/">🔙 Back to Home</a>
+</body>
+</html>

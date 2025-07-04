@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MindAstro - Moon Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/static/indian_cities.json")
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById("cities");
+                data.forEach(city => {
+                    const opt = document.createElement("option");
+                    opt.value = `${city.name}, ${city.state}`;
+                    list.appendChild(opt);
+                });
+            });
+    });
+
+    function switchLang() {
+        const lang = document.getElementById('lang').value;
+        const text = {
+            en: {
+                title: "🌙 Welcome to MindAstro",
+                sub: "Heal Your Mind Through the Stars",
+                dob: "Date of Birth:",
+                tob: "Time of Birth:",
+                pob: "Place of Birth:",
+                btn: "Generate My Moon Profile",
+                placeholder: "Search Indian city..."
+            },
+            hi: {
+                title: "🌙 स्वागत है MindAstro में",
+                sub: "सितारों के माध्यम से अपने मन को ठीक करें",
+                dob: "जन्म तिथि:",
+                tob: "जन्म का समय:",
+                pob: "जन्म स्थान:",
+                btn: "मेरा मून प्रोफ़ाइल जनरेट करें",
+                placeholder: "भारत का कोई भी शहर खोजें..."
+            }
+        };
+        const t = text[lang];
+        document.getElementById('title').innerText = t.title;
+        document.getElementById('subtitle').innerText = t.sub;
+        document.getElementById('label-dob').innerText = t.dob;
+        document.getElementById('label-tob').innerText = t.tob;
+        document.getElementById('label-pob').innerText = t.pob;
+        document.getElementById('pob').placeholder = t.placeholder;
+        document.getElementById('submit-btn').innerText = t.btn;
+    }
+    </script>
+</head>
+
+<body>
+    <div style="position: absolute; top: 10px; right: 20px;">
+        <select id="lang" onchange="switchLang()">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+    </div>
+
+    <h1>🔮 Get Your Personal Moon Forecast</h1>
+    <p>Enter your birth details to discover your emotional traits.</p>
+
+    <p id="subtitle">Heal Your Mind Through the Stars</p>
+
+    <form method="POST" action="/profile" style="display: flex; flex-direction: column; align-items: center;">
+        <label id="label-dob">Date of Birth:</label>
+        <input type="date" name="dob" required><br>
+
+        <label id="label-tob">Time of Birth:</label>
+        <input type="time" name="tob" required><br>
+
+        <label id="label-pob">Place of Birth:</label>
+        <input type="text" id="pob" name="place" list="cities" placeholder="Search Indian city..." autocomplete="off" required>
+        <datalist id="cities"></datalist><br>
+
+        <button id="submit-btn" type="submit">✨ Reveal My Forecast</button>
+
+    </form>
+</body>
+</html>

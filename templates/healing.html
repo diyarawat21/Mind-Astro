@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🌬️ Healing Tools - MindAstro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🌬️ Healing Tools</h1>
+    <p><em>Use these tools to calm your mind and reconnect with yourself.</em></p>
+
+    <h2>🎧 Choose Your Healing Music</h2>
+
+    <audio controls>
+        <source src="{{ url_for('static', filename='calm1.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br><br>
+
+    <audio controls>
+        <source src="{{ url_for('static', filename='calm2.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br><br>
+
+    <audio controls>
+        <source src="{{ url_for('static', filename='calm3.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br><br>
+
+    <a href="/"><button>🔙 Back to Home</button></a>
+</body>
+</html>
+

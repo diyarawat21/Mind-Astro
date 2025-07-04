@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moon Sign Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #e0f7fa;
+            color: #00796b;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-size: 20px;
+        }
+
+        .love-rating {
+            color: #e91e63;
+            font-size: 18px;
+        }
+
+        body.aries       { background: linear-gradient(to right, #ff9a9e, #fad0c4); }
+        body.taurus      { background: linear-gradient(to right, #dcedc8, #f0f4c3); }
+        body.gemini      { background: linear-gradient(to right, #e1f5fe, #b2ebf2); }
+        body.cancer      { background: linear-gradient(to right, #e3f2fd, #fffde7); }
+        body.leo         { background: linear-gradient(to right, #fff3e0, #ffe0b2); }
+        body.virgo       { background: linear-gradient(to right, #f1f8e9, #dcedc8); }
+        body.libra       { background: linear-gradient(to right, #fce4ec, #f3e5f5); }
+        body.scorpio     { background: linear-gradient(to right, #ede7f6, #e8eaf6); }
+        body.sagittarius { background: linear-gradient(to right, #ffe0b2, #fff9c4); }
+        body.capricorn   { background: linear-gradient(to right, #e0f7fa, #e0f2f1); }
+        body.aquarius    { background: linear-gradient(to right, #e1f5fe, #fce4ec); }
+        body.pisces      { background: linear-gradient(to right, #f3e5f5, #e1f5fe); }
+    </style>
+</head>
+
+<body class="{{ moon_sign|lower }}">
+    <div class="card">
+        <h2>🌙 Your Moon Profile</h2>
+        <p><strong>Date of Birth:</strong> {{ dob }}</p>
+        <p><strong>Time of Birth:</strong> {{ tob }}</p>
+        <p><strong>Place of Birth:</strong> {{ place }}</p>
+        <p><strong>Moon Sign:</strong> <span class="badge">{{ moon_sign }}</span></p>
+        <p><strong>Nakshatra:</strong> <span class="badge">{{ nakshatra }}</span></p>
+        <p><strong>Traits:</strong> {{ traits }}</p>
+    </div>
+
+    <div class="card">
+        <h2>🔮 Daily Prediction</h2>
+        <p><strong>Overall Rating:</strong> 
+            <span class="rating">
+                {% for i in range(prediction['overall'] | default(3)) %}⭐{% endfor %}
+            </span>
+        </p>
+        <p><strong>Energy:</strong> <span class="badge">{{ prediction['energy'] | default('Balanced') }}</span></p>
+        <p><strong>Mental:</strong> {{ prediction['mental'] | default('Clear') }}</p>
+        <p><strong>Physical:</strong> {{ prediction['physical'] | default('Steady') }}</p>
+        <p><strong>Love:</strong> 
+            <span class="love-rating">
+                {% for i in range(prediction['love'] | default(5)) %}❤️{% endfor %}
+                ({{ prediction['love'] | default(5) }}/10)
+            </span>
+        </p>
+        <p><strong>Good News:</strong> {{ prediction['good_news'] | default('You may hear something nice today.') }}</p>
+        <p><strong>Caution:</strong> ⚠️ {{ prediction['caution'] | default('Avoid impulsive decisions.') }}</p>
+        <p><strong>Description:</strong> {{ prediction['description'] | default('Today brings a balance of emotion and clarity.') }}</p>
+    </div>
+
+    <div class="card">
+        <h2>💖 Today's Affirmation</h2>
+        <p style="font-style: italic;">"{{ affirmation }}"</p>
+    </div>
+</body>
+</html>
+    

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background-color:#e0f7fa; font-family:sans-serif; color:#333; text-align:center;">
+    <h1>📊 Your Mood Dashboard</h1>
+
+    <canvas id="moodChart" width="400" height="200"></canvas>
+
+    <!-- Jinja2 Data safely passed in JSON -->
+    <script id="mood-data" type="application/json">
+        {
+            "dates": {{ dates | tojson }},
+            "moods": {{ moods | tojson }}
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const data = JSON.parse(document.getElementById('mood-data').textContent);
+            const dates = data.dates;
+            const moods = data.moods;
+
+            const ctx = document.getElementById("moodChart").getContext("2d");
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Mood Level',
+                        data: moods,
+                        fill: false,
+                        borderColor: '#ff69b4',
+                        backgroundColor: '#ff69b4',
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 5,
+                            title: {
+                                display: true,
+                                text: 'Mood Rating (1-5)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <br><br>
+    <a href="/" style="color:#1976d2; text-decoration:none;">🔙 Back to Home</a>
+</body>
+</html>
